@@ -50,7 +50,7 @@ int main(){
     }*/
 
     for(int i = 1; i <= tamanhoVetor; i++){
-        vetorBubbleSort[i] = i++;
+        vetorBubbleSort[i] = i;
     }
 
     cout << endl << endl;
