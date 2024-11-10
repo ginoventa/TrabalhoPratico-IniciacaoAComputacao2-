@@ -1,5 +1,4 @@
 #include <iostream>
-#include <ctime>
 #include <cstdlib>
 using namespace std;
 
@@ -10,28 +9,28 @@ void heapify(int *vetorHeapSort, int L, int R){
 
     int i = L, j = 2*L;
     int x = vetorHeapSort[L];
-    movimentacoesHeapSort++; //Atribuição de um elemento do vetorHeapSort
+    movimentacoesHeapSort++; //AtribuiÃ§Ã£o de um elemento do vetorHeapSort
 
     if(j < R && vetorHeapSort[j] < vetorHeapSort[j+1]){
         j++;
     }
 
     while(j <= R && x < vetorHeapSort[j]){
-        vetorHeapSort[i] = vetorHeapSort[j];//Atribuição de um elemento do vetorHeapSort
+        vetorHeapSort[i] = vetorHeapSort[j];//AtribuiÃ§Ã£o de um elemento do vetorHeapSort
         i = j;
         j = 2*j;
         movimentacoesHeapSort++;
 
-        comparacoesHeapsort++; //If e while realizam uma comparação entre chaves
+        comparacoesHeapsort++; //If e while realizam uma comparaÃ§Ã£o entre chaves
 
         if(j < R && vetorHeapSort[j] < vetorHeapSort[j+1]){
             j++;
         }
     }
-    comparacoesHeapsort++; //Comparação de saída do while
+    comparacoesHeapsort++; //ComparaÃ§Ã£o de saÃ­da do while
 
     vetorHeapSort[i] = x;
-    movimentacoesHeapSort++;//Atribuição de um elemento do vetorHeapSort
+    movimentacoesHeapSort++;//AtribuiÃ§Ã£o de um elemento do vetorHeapSort
 }
 
 void ordenacaoHeapsort(int *vetorHeapSort, int tamanhoVetor){
@@ -46,7 +45,7 @@ void ordenacaoHeapsort(int *vetorHeapSort, int tamanhoVetor){
         w = vetorHeapSort[1];
         vetorHeapSort[1] = vetorHeapSort[R];
         vetorHeapSort[R] = w;
-        movimentacoesHeapSort += 3;//3 atribuições utilizando um elemento do vetorHeapSort
+        movimentacoesHeapSort += 3;//3 atribuiÃ§Ãµes utilizando um elemento do vetorHeapSort
         heapify(vetorHeapSort, 1 , R - 1);
     }
 
