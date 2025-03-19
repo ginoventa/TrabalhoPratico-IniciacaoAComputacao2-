@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 int movimentacoesHeapSort = 0;
@@ -9,28 +9,31 @@ void heapify(int *vetorHeapSort, int L, int R){
 
     int i = L, j = 2*L;
     int x = vetorHeapSort[L];
-    movimentacoesHeapSort++; //Atribuição de um elemento do vetorHeapSort
+    movimentacoesHeapSort++; //Atribuicao de um elemento do vetorHeapSort
 
+    comparacoesHeapsort++;
     if(j < R && vetorHeapSort[j] < vetorHeapSort[j+1]){
         j++;
     }
 
     while(j <= R && x < vetorHeapSort[j]){
-        vetorHeapSort[i] = vetorHeapSort[j];//Atribuição de um elemento do vetorHeapSort
+        vetorHeapSort[i] = vetorHeapSort[j];//Atribuicao de um elemento do vetorHeapSort
         i = j;
         j = 2*j;
         movimentacoesHeapSort++;
-
-        comparacoesHeapsort++; //If e while realizam uma comparação entre chaves
+        comparacoesHeapsort+= 2;
 
         if(j < R && vetorHeapSort[j] < vetorHeapSort[j+1]){
             j++;
         }
+
     }
-    comparacoesHeapsort++; //Comparação de saída do while
+
+    comparacoesHeapsort++;
 
     vetorHeapSort[i] = x;
-    movimentacoesHeapSort++;//Atribuição de um elemento do vetorHeapSort
+    movimentacoesHeapSort++;//Atribuicao de um elemento do vetorHeapSort
+
 }
 
 void ordenacaoHeapsort(int *vetorHeapSort, int tamanhoVetor){
@@ -45,16 +48,9 @@ void ordenacaoHeapsort(int *vetorHeapSort, int tamanhoVetor){
         w = vetorHeapSort[1];
         vetorHeapSort[1] = vetorHeapSort[R];
         vetorHeapSort[R] = w;
-        movimentacoesHeapSort += 3;//3 atribuições utilizando um elemento do vetorHeapSort
+        movimentacoesHeapSort += 3;//3 atribuicoes utilizando um elemento do vetorHeapSort
         heapify(vetorHeapSort, 1 , R - 1);
     }
-
-    /*cout << "HeapSort: ";
-    for(int aux3 = 1; aux3 <= tamanhoVetor; aux3++){
-        cout << vetorHeapSort[aux3] << " ";
-    }*/
-    //cout << endl << "Movimentacoes: "<< movimentacoesHeapSort << " e comparacoes: " << comparacoesHeapsort;
-
 }
 
 int main(){
@@ -68,18 +64,38 @@ int main(){
 
     int vetorHeapSort[tamanhoVetor + 1];
 
-    /*cout << endl << "\nDefina cada posicao do vetor, partindo de 1 ate n: \n";
+    /*
+    //Atribuicao de valores aleatorio - pares e impares tem padroes distintos
+    for(int i = 1; i <= tamanhoVetor; i++){
+        if(i%2){
+            vetorHeapSort[i] = 3*i;
+        }
+        else{
+            vetorHeapSort[i] = ((5*i)/2 + 3);
+        }
+    }
+
+    cout << endl << "\nDefina cada posicao do vetor, partindo de 1 ate n: \n";
     for(int aux = 1; aux <= tamanhoVetor; aux++){
         cout << "\tVetor " << aux << ": ";
             cin >> vetorHeapSort[aux];
             cin.ignore();
         cout << endl;
-    }*/
-
-    for(int i = 1; i <= tamanhoVetor; i++){
-        vetorHeapSort[i] = rand();
     }
 
+    //Atribuicao de valores decrescentes
+    int j = tamanhoVetor;
+    for(int i = 1; i <= tamanhoVetor; i++){
+        vetorHeapSort[i] = j;
+        j--;
+    }*/
+
+    //Atribuicao de valores crescentes
+    for(int i = 1; i <= tamanhoVetor; i++){
+        vetorHeapSort[i] = i;
+    }
+
+    //Estrutura que fara o calculo de tempo
     cout << endl << endl;
     tempo1 = clock();
     ordenacaoHeapsort(vetorHeapSort,tamanhoVetor);
@@ -87,5 +103,14 @@ int main(){
     tempo_total=difftime(tempo2,tempo1)/CLOCKS_PER_SEC;
     cout << "\nTempo total: " << tempo_total;
 
-}
+    cout << "HeapSort: ";
+    //Estrutura que printa vetor ordenado - usado para conferir a organizacao dos vetores dados
+    /*for(int aux3 = 1; aux3 <= tamanhoVetor; aux3++){
+       cout << vetorHeapSort[aux3] << " ";
+    }*/
 
+    //Estrutura que printa o numero de movimentacoes e comparacoes
+    cout << endl << "Movimentacoes: "<< movimentacoesHeapSort
+    << " e comparacoes: " << comparacoesHeapsort;
+
+}

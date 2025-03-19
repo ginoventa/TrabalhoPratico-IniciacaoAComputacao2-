@@ -13,7 +13,7 @@ void ordenacaoInsercaoDireta(int *vetorOrdenadoDireta, int tamanhoVetor){
         aux2 = aux1;
         movimentacoesInsercaoDireta += 2;
 
-        while(aux2 > 0 && numeroAtual < vetorOrdenadoDireta[aux2 - 1]){
+        while(numeroAtual < vetorOrdenadoDireta[aux2 - 1]){
             vetorOrdenadoDireta[aux2] = vetorOrdenadoDireta[aux2-1];
             aux2 = aux2 - 1;
             comparacoesInsercaoDireta++;
@@ -24,12 +24,6 @@ void ordenacaoInsercaoDireta(int *vetorOrdenadoDireta, int tamanhoVetor){
         movimentacoesInsercaoDireta++;
     }
 
-    cout << "Ordenacao por insercao direta: ";
-    /*for(int aux3 = 1; aux3 <= tamanhoVetor; aux3++){
-        cout << vetorOrdenadoDireta[aux3] << " ";
-    }
-
-    cout << endl << "Movimentacoes: "<< movimentacoesInsercaoDireta << " e comparacoes: " << comparacoesInsercaoDireta;*/
 }
 
 
@@ -42,26 +36,58 @@ int main(){
     cout << "Qual sera o tamanho n do vetor? ";
     cin >> tamanhoVetor;
     cin.ignore();
-
     int vetorOrdenadoDireta[tamanhoVetor + 1];
 
-    /*cout << endl << "\nDefina cada posicao do vetor, partindo de 1 ate n: \n";
+    /*
+    //Atribuicao de valores aleatorio - pares e impares tem padroes distintos
+    for(int i = 1; i <= tamanhoVetor; i++){
+        if(i%2){
+            vetorOrdenadoDireta[i] = 3*i;
+        }
+        else{
+            vetorOrdenadoDireta[i] = ((5*i)/2 + 3);
+        }
+    }
+
+    cout << endl << "\nDefina cada posicao do vetor, partindo de 1 ate n: \n";
     for(int aux = 1; aux <= tamanhoVetor; aux++){
         cout << "\tVetor " << aux << ": ";
             cin >> vetorOrdenadoDireta[aux];
             cin.ignore();
         cout << endl;
-    }*/
-
-    for(int i = 1; i <= tamanhoVetor; i++){
-        vetorOrdenadoDireta[i] = i++;
     }
 
+    //Atribuicao de valores decrescentes
+    int j = tamanhoVetor;
+    for(int i = 1; i <= tamanhoVetor; i++){
+        vetorOrdenadoDireta[i] = j;
+        j--;
+    }
+
+    /*
+    //Atribuicao de valores crescentes
+    for(int i = 1; i <= tamanhoVetor; i++){
+        vetorOrdenadoDireta[i] = i;
+    }*/
+
+    //Estrutura que fara o calculo de tempo
+    cout << endl << endl;
     tempo1 = clock();
     ordenacaoInsercaoDireta(vetorOrdenadoDireta, tamanhoVetor);
     tempo2=clock();
     tempo_total=difftime(tempo2,tempo1)/CLOCKS_PER_SEC;
     cout << "\nTempo total: " << tempo_total;
-    cout << endl << endl;
+
+    cout << "Ordenacao por insercao direta: ";
+    //Estrutura que printa vetor ordenado - usado para conferir a organizacaoo dos vetores dados
+    /*for(int aux3 = 1; aux3 <= tamanhoVetor; aux3++){
+        cout << vetorOrdenadoDireta[aux3] << " ";
+    }*/
+
+    //Estrutura que printa o numero de movimentacoes e comparacoes
+    cout << endl << "Movimentacoes: "<< movimentacoesInsercaoDireta << " e comparacoes: " << comparacoesInsercaoDireta;
+
+
 
 }
+

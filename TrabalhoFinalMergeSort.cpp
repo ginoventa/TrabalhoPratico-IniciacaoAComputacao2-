@@ -70,13 +70,6 @@ void ordenacaoMergesort(int *vetorMergesort, int tamanhoVetor){
         mpass(c, tamanhoVetor, p, vetorMergesort);
         p = 2*p;
     }
-
-    cout << "Mergesort: ";
-    /*for(int aux3 = 1; aux3 <= tamanhoVetor; aux3++){
-        cout << vetorMergesort[aux3] << " ";
-    }
-    */
-    //cout << endl << "Movimentacoes: "<< movimentacoesMergeSort << " e comparacoes: " << comparacoesMergesort;
 }
 
 int main(){
@@ -91,20 +84,40 @@ int main(){
 
     int vetorMergesort[tamanhoVetor + 1];
 
-    /*cout << endl << "\nDefina cada posicao do vetor, partindo de 1 ate n: \n";
+
+    /*
+    //Atribuicao de valores aleatorio - pares e impares tem padroes distintos
+    for(int i = 1; i <= tamanhoVetor; i++){
+        if(i%2){
+            vetorMergesort[i] = 3*i;
+        }
+        else{
+            vetorMergesort[i] = ((5*i)/2 + 3);
+        }
+    }
+
+    cout << endl << "\nDefina cada posicao do vetor, partindo de 1 ate n: \n";
     for(int aux = 1; aux <= tamanhoVetor; aux++){
         cout << "\tVetor " << aux << ": ";
             cin >> vetorMergesort[aux];
             cin.ignore();
         cout << endl;
-    }*/
-
-    int j = 1;
-    for(int i = tamanhoVetor; i <= 1; i--){
-        vetorMergesort[j] = i;
-        j++;
     }
 
+    //Atribuicao de valores decrescentes
+    int j = tamanhoVetor;
+    for(int i = 1; i <= tamanhoVetor; i++){
+        vetorMergesort[i] = j;
+        j--;
+    }
+
+    /*
+    //Atribuicao de valores crescentes
+    for(int i = 1; i <= tamanhoVetor; i++){
+        vetorMergesort[i] = i;
+    }*/
+
+    //Estrutura que fara o calculo de tempo
     cout << endl << endl;
     tempo1 = clock();
     ordenacaoMergesort(vetorMergesort,tamanhoVetor);
@@ -112,6 +125,14 @@ int main(){
     tempo_total=difftime(tempo2,tempo1)/CLOCKS_PER_SEC;
     cout <<  "\nTempo total: " << tempo_total;
 
+    cout << endl << "Mergesort: ";
+    //Estrutura que printa vetor ordenado - usado para conferir a organizacao dos vetores dados
+    /*for(int aux3 = 1; aux3 <= tamanhoVetor; aux3++){
+        cout << vetorMergesort[aux3] << " ";
+    }*/
 
+
+    //Estrutura que printa o numero de movimentacoes e comparacoes
+    cout << endl << "Movimentacoes: "<< movimentacoesMergeSort
+    << " e comparacoes: " << comparacoesMergesort;
 }
-
